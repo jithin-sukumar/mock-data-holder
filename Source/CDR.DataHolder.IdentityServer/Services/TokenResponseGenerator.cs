@@ -358,7 +358,7 @@ namespace CDR.DataHolder.IdentityServer.Services
             {
                 // Cleanup previous refresh token.
                 var oldData = JsonConvert.DeserializeObject<CdrArrangementGrant>(existingGrant.Data);
-                if (!string.IsNullOrEmpty(oldData.RefreshTokenKey))
+                if (!string.IsNullOrEmpty(oldData.RefreshTokenKey) && validatedRequest.GrantType != CdsConstants.GrantTypes.RefreshToken)
                 {
                     await _customGrantService.RemoveGrant(oldData.RefreshTokenKey);
                 }
